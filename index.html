@@ -20,14 +20,6 @@ html, body { margin: 0; background: #1b1b1a; }
 .page { position: relative; }
 .board { position: relative; max-width: 700px; margin: 0 auto; }
 .art { display: block; width: 100%; height: auto; }
-/* Feather the board into the video collection without moving their clickable areas. */
-.work::before {
-  content: ""; position: absolute; z-index: 2; top: 0; left: 0; right: 0;
-  height: clamp(24px, 4vw, 64px); transform: translateY(-50%); pointer-events: none;
-  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 40%, #000 60%, transparent);
-  mask-image: linear-gradient(to bottom, transparent, #000 40%, #000 60%, transparent);
-}
 .anchor { position: absolute; left: 0; width: 1px; height: 1px; }
 .sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 /* Laptops: the board stands in the middle on a plain dark wall. */
@@ -339,4 +331,3 @@ body.has-hire { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
 </script>
 </body>
 </html>
-
