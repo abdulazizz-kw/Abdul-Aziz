@@ -22,17 +22,8 @@ html, body { margin: 0; background: #1b1b1a; }
 .art { display: block; width: 100%; height: auto; }
 .anchor { position: absolute; left: 0; width: 1px; height: 1px; }
 .sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
-/* Laptops: the board stands in the middle, and a soft, blurred glow of the same picture (already downloaded) fills the sides. */
-@media (min-width: 761px) {
-  .page { isolation: isolate; overflow: hidden; background: #15110d; }
-  .page::before { content: ""; position: absolute; inset: -120px; z-index: -1;
-    background: url(images/phone-1125.webp) center / 100% 100% no-repeat;
-    background-image: -webkit-image-set(url(images/phone-1125.webp) 1x, url(images/phone-1500.webp) 2x);
-    background-image: image-set(url(images/phone-1125.webp) 1x, url(images/phone-1500.webp) 2x);
-    filter: blur(70px) brightness(.42) saturate(1.15); }
-  .page::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse 75% 60% at 50% 40%, #0000 35%, #0b0907b0 100%); }
-  .board .art { -webkit-mask-image: linear-gradient(90deg, #0000, #000 3.5%, #000 96.5%, #0000); mask-image: linear-gradient(90deg, #0000, #000 3.5%, #000 96.5%, #0000); }
-}
+/* Laptops: the board stands in the middle on a plain dark wall. */
+@media (min-width: 761px) { .page { background: #1a1612; } }
 
 /* Clickable areas over the artwork (positions measured from the design file). */
 .hot { position: absolute; border-radius: 6px; }
