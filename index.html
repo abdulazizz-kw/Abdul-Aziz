@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Abdul Aziz | Videographer</title>
-<meta name="description" content="Abdul Aziz: videographer, video editor and social media manager based in Kuwait.">
+<title>Abdul Aziz | Video Editor &amp; Social Media Manager</title>
+<meta name="description" content="Abdul Aziz: video editor and social media manager based in Kuwait.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@900&family=Inter:wght@400;500;600;700&display=swap">
@@ -98,6 +98,24 @@
 .film .info b{font-size:14px;font-weight:500;line-height:1.5;letter-spacing:0}
 .featured-film .info b{letter-spacing:0}
 @media(max-width:600px){.film .info{padding-top:12px}.film .info b{font-size:12px}}
+
+/* Final typography hierarchy, shared across desktop and mobile. */
+:root{--font-body:16px;--font-label:14px;--font-heading:28px;--font-hero:36px}
+body{font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:var(--font-body);line-height:1.65}
+.hero h1.role{font-size:var(--font-hero);font-weight:500;line-height:1.2;letter-spacing:-.025em;max-width:27ch}
+.hero .intro{font-size:var(--font-body);line-height:1.65;max-width:60ch;color:#aaa8a1}
+.section-head h2,.sec h2,.brands-heading{font-size:var(--font-heading);font-weight:600;line-height:1.25;letter-spacing:-.025em}
+.contact h2{font-size:var(--font-heading);max-width:none}
+.about-story p,.sec p,.facts dd{font-size:var(--font-body);line-height:1.65}
+.about .lead{font-size:20px;font-weight:700;line-height:1.35}
+nav a,.filters button,.film .info b,.featured-film .info b,.feature-action,.outline-button,.email-button,.social-link,.project-back,.project-bottom,.project-credits dl div{font-size:var(--font-label);letter-spacing:0;line-height:1.5}
+.film .info b,.featured-film .info b{font-weight:500}
+.facts dt,.eyebrow,.section-head p,footer{font-size:12px;line-height:1.5}
+.client-names span{font-size:16px;line-height:1.6;letter-spacing:0}
+.project-title{font-size:var(--font-heading);font-weight:500;line-height:1.25}
+.hero{padding:48px 0 44px}
+.featured-film .info{gap:12px}
+@media(max-width:600px){:root{--font-heading:24px;--font-hero:28px}.hero h1.role{font-size:var(--font-hero)}.hero .intro{font-size:var(--font-body)}.hero{padding:36px 0}.about .lead{font-size:18px}.filters button{padding:8px 12px}.section-head{align-items:center}.section-head p{max-width:18ch}.featured-film .info{align-items:baseline}.feature-action{font-size:12px}.project-title{font-size:var(--font-heading)}nav{gap:16px}}
 </style>
 </head>
 <body>
@@ -112,7 +130,7 @@
 </header>
 
 <main id="top">
-  <section class="hero" aria-labelledby="intro-h"><div><p class="eyebrow">Based in Kuwait</p><h1 id="intro-h" class="role">Videographer, video editor &amp; social media manager.</h1><p class="intro">Commercials, brand stories and social content. Behind the camera and in the edit.</p></div></section>
+  <section class="hero" aria-labelledby="intro-h"><div><p class="eyebrow">Based in Kuwait</p><h1 id="intro-h" class="role">Video Editor &amp; Social Media Manager</h1><p class="intro">Video editing and social media content for brands, with a focus on clear storytelling, thoughtful pacing and a consistent visual identity.</p></div></section>
   <section class="featured-projects" aria-labelledby="featured-h"><div class="section-head"><h2 id="featured-h">Featured projects</h2><p>A closer look at the work.</p></div><div class="featured-grid"><a class="featured-film" href="?project=1233815220" data-vimeo-id="1233815220">
         <img src="https://i.vimeocdn.com/video/2209597927-97f44188bbaaebb57f2b45c58b5cca74533465e910eb2ce19763f4f6063fbce9-d_1280?region=us"  sizes="(max-width:600px) 100vw, 50vw" alt="" width="1280" height="720" loading="eager" decoding="async" style="object-position:50% 50%">
         <span class="info"><b>Milk Bun</b><span class="feature-action">Watch project <span aria-hidden="true">↗</span></span></span>
@@ -242,7 +260,7 @@
       </dl>
     </div>
     <div class="about-story">
-    <p>I’m Abdul Aziz, a videographer, video editor and social media manager based in Kuwait. I started with an Osmo Pocket 3, CapCut and an eagerness to learn. That curiosity took me to the Sony FX3 and DaVinci Resolve, developing my approach to lighting, composition, colour and sound along the way.</p>
+    <p>I’m Abdul Aziz, a video editor and social media manager based in Kuwait. I started with an Osmo Pocket 3, CapCut and an eagerness to learn. That curiosity took me to the Sony FX3 and DaVinci Resolve, developing my approach to lighting, composition, colour and sound along the way.</p>
     <p>Today, I work on commercials, brand videos, restaurant content, podcasts and social media, with experience working alongside marketing teams and managing social media. I still enjoy the same things that got me started: trying an idea, finding the right shot and bringing it together in the edit.</p>
     </div>
   </section>
