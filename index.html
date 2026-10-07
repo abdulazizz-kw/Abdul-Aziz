@@ -33,8 +33,11 @@ nav a.on, nav a:hover { border-bottom-color: #fff; }
 .show .film { aspect-ratio: 16 / 9; }
 .show .info { opacity: 1; padding: 28px 30px; }
 .show .info b { font-size: 28px; }
+/* Sections of vertical films, each with its own heading */
+.group { margin-top: 96px; }
+.group h2 { max-width: 1180px; margin: 0 auto 18px; padding: 0 8px; font-weight: 900; font-stretch: 62%; font-size: 48px; line-height: 1; text-transform: uppercase; }
 /* The vertical films: three across on laptops, two on tablets and phones */
-.films { list-style: none; max-width: 1180px; margin: 6px auto 0; padding: 0 8px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.films { list-style: none; max-width: 1180px; margin: 0 auto; padding: 0 8px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
 .films li { flex: 0 0 calc((100% - 12px) / 3); }  /* a last row that is not full stays centred */
 .film { position: relative; display: block; aspect-ratio: 9 / 16; overflow: hidden; background: #111; }
 .film img { display: block; width: 100%; height: 100%; object-fit: cover; transition: opacity .3s; }
@@ -69,10 +72,11 @@ footer { max-width: 1180px; margin: 0 auto; padding: 120px 8px 32px; font-size: 
   .mark { font-size: 24px; } .logo small { font-size: 11px; margin-top: 5px; }
   nav { gap: 16px; } nav a { font-size: 18px; }
   .show { padding: 0; } .show .info { padding: 16px; } .show .info b { font-size: 20px; }
-  .films { padding: 0; gap: 4px; margin-top: 4px; } .films li { flex-basis: calc((100% - 4px) / 2); }
+  .films { padding: 0; gap: 4px; } .films li { flex-basis: calc((100% - 4px) / 2); }
   .info { padding: 30px 10px 10px; } .info b { font-size: 15px; } .info small { font-size: 12px; }
   .sec, footer { padding-left: 16px; padding-right: 16px; }
   .sec { padding-top: 80px; } .sec h2 { font-size: 40px; }
+  .group { margin-top: 64px; } .group h2 { font-size: 34px; padding: 0 16px; margin-bottom: 12px; }
 }
 </style>
 </head>
@@ -95,48 +99,61 @@ footer { max-width: 1180px; margin: 0 auto; padding: 120px 8px 32px; font-size: 
       <span class="info"><b>JUL: Less Waiting, More Skating</b><small>Brand film</small></span>
     </a>
   </div>
-  <ul class="films" aria-label="More work">
-    <li><a class="film" href="https://vimeo.com/1233530243" target="_blank" rel="noopener" data-play data-vertical>
-      <img src="https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_640" srcset="https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_640 640w, https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_960 960w, https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
-      <span class="info"><b>Butterfly Chocolate</b><small>Commercial</small></span>
-    </a></li>
-    <li><a class="film" href="https://vimeo.com/1233530206" target="_blank" rel="noopener" data-play data-vertical>
-      <img src="https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_640" srcset="https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_640 640w, https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_960 960w, https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
-      <span class="info"><b>Dar Hamad</b><small>Commercial</small></span>
-    </a></li>
-    <li><a class="film" href="https://vimeo.com/1233541493" target="_blank" rel="noopener" data-play data-vertical>
-      <img src="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_640" srcset="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_640 640w, https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_960 960w, https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
-      <span class="info"><b>ProBar Challenge</b><small>Talking heads</small></span>
-    </a></li>
-    <li><a class="film" href="https://vimeo.com/1233530193" target="_blank" rel="noopener" data-play data-vertical>
-      <img src="https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_640" srcset="https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_640 640w, https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_960 960w, https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
-      <span class="info"><b>Deboned</b><small>Commercial</small></span>
-    </a></li>
-    <li><a class="film" href="https://vimeo.com/1233530186" target="_blank" rel="noopener" data-play data-vertical>
-      <img src="https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_640" srcset="https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_640 640w, https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_960 960w, https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
-      <span class="info"><b>Dice: Football Sequence</b><small>Social content</small></span>
-    </a></li>
-    <li><a class="film" href="https://vimeo.com/1233530098" target="_blank" rel="noopener" data-play data-vertical>
-      <img src="https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_640" srcset="https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_640 640w, https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_960 960w, https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
-      <span class="info"><b>JUL: One Shot</b><small>One shot</small></span>
-    </a></li>
-    <li><a class="film" href="https://vimeo.com/1233530092" target="_blank" rel="noopener" data-play data-vertical>
-      <img src="https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_640" srcset="https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_640 640w, https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_960 960w, https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
-      <span class="info"><b>Madison &amp; Heig</b><small>Commercial</small></span>
-    </a></li>
-    <li><a class="film" href="https://vimeo.com/1233530113" target="_blank" rel="noopener" data-play data-vertical>
-      <img src="https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_640" srcset="https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_640 640w, https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_960 960w, https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
-      <span class="info"><b>Ever</b><small>Campaign</small></span>
-    </a></li>
-    <li><a class="film" href="https://vimeo.com/1233530156" target="_blank" rel="noopener" data-play data-vertical>
-      <img src="https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_640" srcset="https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_640 640w, https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_960 960w, https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
-      <span class="info"><b>Dice</b><small>Commercial</small></span>
-    </a></li>
-    <li><a class="film" href="https://vimeo.com/1233530244" target="_blank" rel="noopener" data-play data-vertical>
-      <img src="https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_640" srcset="https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_640 640w, https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_960 960w, https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
-      <span class="info"><b>Al Wazzan Al Shamali</b><small>Social content</small></span>
-    </a></li>
-  </ul>
+  <section class="group" id="productions" aria-labelledby="productions-h">
+    <h2 id="productions-h">Video Productions</h2>
+    <ul class="films">
+      <li><a class="film" href="https://vimeo.com/1233530243" target="_blank" rel="noopener" data-play data-vertical>
+        <img src="https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_640" srcset="https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_640 640w, https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_960 960w, https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
+        <span class="info"><b>Butterfly Chocolate</b><small>Commercial</small></span>
+      </a></li>
+      <li><a class="film" href="https://vimeo.com/1233530206" target="_blank" rel="noopener" data-play data-vertical>
+        <img src="https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_640" srcset="https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_640 640w, https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_960 960w, https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
+        <span class="info"><b>Dar Hamad</b><small>Commercial</small></span>
+      </a></li>
+      <li><a class="film" href="https://vimeo.com/1233530193" target="_blank" rel="noopener" data-play data-vertical>
+        <img src="https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_640" srcset="https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_640 640w, https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_960 960w, https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
+        <span class="info"><b>Deboned</b><small>Commercial</small></span>
+      </a></li>
+      <li><a class="film" href="https://vimeo.com/1233530098" target="_blank" rel="noopener" data-play data-vertical>
+        <img src="https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_640" srcset="https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_640 640w, https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_960 960w, https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
+        <span class="info"><b>JUL: One Shot</b><small>One shot</small></span>
+      </a></li>
+      <li><a class="film" href="https://vimeo.com/1233530113" target="_blank" rel="noopener" data-play data-vertical>
+        <img src="https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_640" srcset="https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_640 640w, https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_960 960w, https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
+        <span class="info"><b>Ever</b><small>Campaign</small></span>
+      </a></li>
+      <li><a class="film" href="https://vimeo.com/1233530156" target="_blank" rel="noopener" data-play data-vertical>
+        <img src="https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_640" srcset="https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_640 640w, https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_960 960w, https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
+        <span class="info"><b>Dice</b><small>Commercial</small></span>
+      </a></li>
+    </ul>
+  </section>
+  <section class="group" id="reels" aria-labelledby="reels-h">
+    <h2 id="reels-h">Reels</h2>
+    <ul class="films">
+      <li><a class="film" href="https://vimeo.com/1233530186" target="_blank" rel="noopener" data-play data-vertical>
+        <img src="https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_640" srcset="https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_640 640w, https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_960 960w, https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
+        <span class="info"><b>Dice: Football Sequence</b><small>Social content</small></span>
+      </a></li>
+      <li><a class="film" href="https://vimeo.com/1233530092" target="_blank" rel="noopener" data-play data-vertical>
+        <img src="https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_640" srcset="https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_640 640w, https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_960 960w, https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
+        <span class="info"><b>Madison &amp; Heig</b><small>Commercial</small></span>
+      </a></li>
+      <li><a class="film" href="https://vimeo.com/1233530244" target="_blank" rel="noopener" data-play data-vertical>
+        <img src="https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_640" srcset="https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_640 640w, https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_960 960w, https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
+        <span class="info"><b>Al Wazzan Al Shamali</b><small>Social content</small></span>
+      </a></li>
+    </ul>
+  </section>
+  <section class="group" id="talking-heads" aria-labelledby="talking-heads-h">
+    <h2 id="talking-heads-h">Talking Heads</h2>
+    <ul class="films">
+      <li><a class="film" href="https://vimeo.com/1233541493" target="_blank" rel="noopener" data-play data-vertical>
+        <img src="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_640" srcset="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_640 640w, https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_960 960w, https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
+        <span class="info"><b>ProBar Challenge</b><small>Prolife</small></span>
+      </a></li>
+    </ul>
+  </section>
 
   <section class="sec" id="about">
     <h2>About</h2>
