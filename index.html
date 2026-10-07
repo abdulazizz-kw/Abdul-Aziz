@@ -121,7 +121,7 @@
         <span class="info"><b>Thinnies</b><span class="feature-action">Watch project <span aria-hidden="true">↗</span></span></span>
       </a></div></section>
   <section class="work" id="productions" aria-labelledby="productions-h">
-    <div class="section-head"><h2 id="productions-h">Selected work</h2><p>Commercials to conversations.</p></div>
+    <div class="section-head"><h2 id="productions-h">Project Portfolio</h2></div>
     <div class="filters" role="group" aria-label="Filter projects" hidden><button type="button" data-filter="all" aria-pressed="true">All</button><button type="button" data-filter="production" aria-pressed="false">Video Production</button><button type="button" data-filter="reels" aria-pressed="false">Reels</button><button type="button" data-filter="talking" aria-pressed="false">Interviews and Events</button></div>
     <ul class="films" id="work-grid"><li data-category="production" data-selected><a class="film" href="?project=1233530243" data-vimeo-id="1233530243" data-vertical>
         <span class="poster"><img src="https://i.vimeocdn.com/video/2209647293-3b7d2897b6b8015a66803c8f79e015bc30bf095d21ac1ade35fd3c4ee9aed0b5-d_1280?region=us" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="1280" height="720" loading="eager" decoding="async" style="object-position:50% 50%"><span class="play-icon" aria-hidden="true">↗</span></span>
@@ -347,7 +347,7 @@
     var visible = visibleProjects(cards, category, expanded);
     cards.forEach(function (card) { card.el.hidden = visible.indexOf(card) === -1; });
     $('work-count').innerHTML = '<strong>' + visible.length + '</strong><span> / ' + cards.length + ' projects</span>';
-    $('productions-h').textContent = category === 'all' && !expanded ? 'Selected work' : 'Explore the work';
+    $('productions-h').textContent = 'Project Portfolio';
     $('view-all').hidden = category !== 'all';
     $('view-all').innerHTML = expanded ? 'Show selected work <span aria-hidden="true">↑</span>' : 'View all work <span aria-hidden="true">↗</span>';
     document.querySelectorAll('[data-filter]').forEach(function (button) { button.setAttribute('aria-pressed', String(button.dataset.filter === category)); });
