@@ -20,6 +20,14 @@ html, body { margin: 0; background: #1b1b1a; }
 .page { position: relative; }
 .board { position: relative; max-width: 700px; margin: 0 auto; }
 .art { display: block; width: 100%; height: auto; }
+/* Feather the board into the video collection without moving their clickable areas. */
+.work::before {
+  content: ""; position: absolute; z-index: 2; top: 0; left: 0; right: 0;
+  height: clamp(24px, 4vw, 64px); transform: translateY(-50%); pointer-events: none;
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 40%, #000 60%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 40%, #000 60%, transparent);
+}
 .anchor { position: absolute; left: 0; width: 1px; height: 1px; }
 .sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 /* Laptops: the board stands in the middle, and a soft, blurred glow of the same picture (already downloaded) fills the sides. */
@@ -61,8 +69,13 @@ body.has-hire { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
 @media (min-width: 761px) { .hire { left: 50%; right: auto; width: 680px; transform: translateX(-50%); } }
 
 /* ---------- The work: every video, pinned to the chalkboard ---------- */
-.work { padding: clamp(40px, 6vw, 90px) clamp(16px, 4vw, 56px) clamp(64px, 8vw, 120px); color: #ecebe6;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, #2b2b29 0%, #1b1b1a 70%); }
+.work { position: relative; padding: clamp(40px, 6vw, 90px) clamp(16px, 4vw, 56px) clamp(64px, 8vw, 120px); color: #ecebe6;
+  background-color: #252420;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Cpath fill='%23fff' opacity='.13' filter='url(%23grain)' d='M0 0h160v160H0z'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 85% 0%, #5b514033, transparent 55%),
+    radial-gradient(ellipse at 30% 35%, #ffffff08, #00000035);
+  background-size: 160px 160px, 100% 100%, 100% 100%; }
 .work-in { max-width: 1400px; margin: 0 auto; }
 .work h2 { margin: 0; font: 700 clamp(44px, 7vw, 96px)/.95 "Gaegu", "Segoe Print", "Comic Sans MS", cursive; color: #f1f0ea; text-shadow: 0 0 1px #fff9, 0 0 14px #ffffff12; }
 .work h2 small { font-size: .38em; vertical-align: top; margin-left: .3em; color: #e0605c; }
@@ -78,8 +91,15 @@ body.has-hire { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
 .snap { position: relative; display: block; padding: 8px 8px 0; border-radius: 2px; color: #1d1a17; text-decoration: none;
   background: #f2efe8; box-shadow: 0 20px 32px -18px #000, 0 2px 4px #0007; }
 .snap:focus-visible { outline: 3px solid #f1e59a; outline-offset: 4px; }
-.tape { position: absolute; z-index: 2; left: 50%; top: -12px; width: 44%; height: 24px; transform: translateX(-50%) rotate(-3deg);
-  background: linear-gradient(180deg, #d24c52b8, #b8343ab8); box-shadow: 0 1px 2px #0004; }
+.pin { position: absolute; z-index: 2; left: 50%; top: -18px; width: 30px; height: 36px;
+  transform: translateX(-50%) rotate(-12deg); pointer-events: none; }
+.pin::before { content: ""; position: absolute; left: 11px; top: 12px; width: 14px; height: 22px;
+  border-radius: 45% 45% 50% 50%; transform: rotate(-18deg);
+  background: linear-gradient(100deg, #c9383f, #a0212b);
+  box-shadow: 4px 6px 5px #0005; }
+.pin::after { content: ""; position: absolute; left: 3px; top: 0; width: 24px; height: 24px; border-radius: 50%;
+  background: radial-gradient(circle at 32% 25%, #ffaaa3 0%, #ee6867 18%, #d33e48 48%, #98222d 85%);
+  box-shadow: inset -2px -3px 3px #79192380, 1px 3px 3px #0004; }
 .photo { position: relative; display: block; aspect-ratio: 9 / 16; overflow: hidden; background: #2a2826; }
 .photo img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.92) contrast(1.03); }
 .play { position: absolute; left: 10px; bottom: 10px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
@@ -189,70 +209,70 @@ body.has-hire { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
     <ul class="grid">
     <li class="tile" data-group="Commercial" style="--r:-2.2deg">
       <a class="snap" href="https://vimeo.com/1233530243" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Butterfly Chocolate">
-        <span class="tape" aria-hidden="true"></span>
+        <span class="pin" aria-hidden="true"></span>
         <span class="photo"><img src="https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_480" srcset="https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_320 320w, https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_480 480w, https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 40%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Butterfly Chocolate</b><small>Commercial &middot; Product<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Brand film" style="--r:1.4deg">
       <a class="snap" href="https://vimeo.com/1233530096" target="_blank" rel="noopener" data-play aria-label="Play JUL: Less Waiting, More Skating">
-        <span class="tape" aria-hidden="true"></span>
+        <span class="pin" aria-hidden="true"></span>
         <span class="photo"><img src="https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_480" srcset="https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_320 320w, https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_480 480w, https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:72% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>JUL: Less Waiting, More Skating</b><small>Brand film &middot; Lifestyle<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Commercial" style="--r:-0.8deg">
       <a class="snap" href="https://vimeo.com/1233530206" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Dar Hamad">
-        <span class="tape" aria-hidden="true"></span>
+        <span class="pin" aria-hidden="true"></span>
         <span class="photo"><img src="https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_480" srcset="https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_320 320w, https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_480 480w, https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Dar Hamad</b><small>Commercial &middot; Restaurant<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Social content" style="--r:2deg">
       <a class="snap" href="https://vimeo.com/1233530186" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Dice: Football Sequence">
-        <span class="tape" aria-hidden="true"></span>
+        <span class="pin" aria-hidden="true"></span>
         <span class="photo"><img src="https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_480" srcset="https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_320 320w, https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_480 480w, https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Dice: Football Sequence</b><small>Social content &middot; Product<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Commercial" style="--r:-1.6deg">
       <a class="snap" href="https://vimeo.com/1233530193" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Deboned">
-        <span class="tape" aria-hidden="true"></span>
+        <span class="pin" aria-hidden="true"></span>
         <span class="photo"><img src="https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_480" srcset="https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_320 320w, https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_480 480w, https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 75%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Deboned</b><small>Commercial &middot; Restaurant<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Campaign" style="--r:-2.2deg">
       <a class="snap" href="https://vimeo.com/1233530113" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Ever">
-        <span class="tape" aria-hidden="true"></span>
+        <span class="pin" aria-hidden="true"></span>
         <span class="photo"><img src="https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_480" srcset="https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_320 320w, https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_480 480w, https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Ever</b><small>Campaign &middot; Seasonal<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Commercial" style="--r:1.4deg">
       <a class="snap" href="https://vimeo.com/1233530092" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Madison &amp; Heig">
-        <span class="tape" aria-hidden="true"></span>
+        <span class="pin" aria-hidden="true"></span>
         <span class="photo"><img src="https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_480" srcset="https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_320 320w, https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_480 480w, https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Madison &amp; Heig</b><small>Commercial &middot; Bakery<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="One shot" style="--r:-0.8deg">
       <a class="snap" href="https://vimeo.com/1233530098" target="_blank" rel="noopener" data-play data-vertical aria-label="Play JUL: One Shot">
-        <span class="tape" aria-hidden="true"></span>
+        <span class="pin" aria-hidden="true"></span>
         <span class="photo"><img src="https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_480" srcset="https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_320 320w, https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_480 480w, https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>JUL: One Shot</b><small>One shot &middot; Hospitality<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Commercial" style="--r:2deg">
       <a class="snap" href="https://vimeo.com/1233530156" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Dice">
-        <span class="tape" aria-hidden="true"></span>
+        <span class="pin" aria-hidden="true"></span>
         <span class="photo"><img src="https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_480" srcset="https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_320 320w, https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_480 480w, https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Dice</b><small>Commercial &middot; Product<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Social content" style="--r:-1.6deg">
       <a class="snap" href="https://vimeo.com/1233530244" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Al Wazzan Al Shamali">
-        <span class="tape" aria-hidden="true"></span>
+        <span class="pin" aria-hidden="true"></span>
         <span class="photo"><img src="https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_480" srcset="https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_320 320w, https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_480 480w, https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Al Wazzan Al Shamali</b><small>Social content &middot; Delivery<span class="yr">2026</span></small></span>
       </a>
@@ -328,3 +348,4 @@ body.has-hire { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
 </script>
 </body>
 </html>
+
