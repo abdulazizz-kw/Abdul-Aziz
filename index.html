@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AbdulAziz | Videographer</title>
-<meta name="description" content="AbdulAziz: videographer, video editor, photographer and podcast producer in Kuwait.">
+<title>Abdul Aziz | Videographer</title>
+<meta name="description" content="Abdul Aziz: videographer, video editor, photographer and podcast producer in Kuwait.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..100,300..900&display=swap">
@@ -56,6 +56,16 @@ nav a.on, nav a:hover { border-bottom-color: #fff; }
 .sec h2 { margin: 0 0 18px; font-weight: 900; font-stretch: 62%; font-size: 48px; line-height: 1; text-transform: uppercase; }
 .sec p { margin: 0 0 16px; color: #d6d6d6; line-height: 1.6; }
 .sec .lead { margin-bottom: 22px; color: #fff; font-weight: 600; font-stretch: 85%; font-size: 26px; line-height: 1.3; }
+/* About: the passion line and the facts on the left, the story on the right */
+.about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr); gap: 72px; align-items: start; }
+.about > * { max-width: none; }
+.about .lead { margin: 0; max-width: 14ch; font-size: 38px; line-height: 1.12; }
+.facts { margin: 40px 0 0; padding: 0; border-top: 1px solid #2a2a2a; }
+.facts div { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid #2a2a2a; }
+.facts dt { font-size: 15px; color: #8f8f8f; }
+.facts dd { margin: 0; font-size: 16px; line-height: 1.45; color: #fff; }
+.about-story { padding-top: 66px; }
+.about-story p { max-width: 62ch; font-size: 19px; line-height: 1.7; color: #cfcfcf; }
 .links { display: flex; flex-wrap: wrap; gap: 12px 30px; font-size: 24px; }
 .links a { border-bottom: 2px solid #fff; }
 footer { max-width: 1180px; margin: 0 auto; padding: 120px 8px 32px; font-size: 14px; color: #8a8a8a; }
@@ -79,6 +89,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 120px 8px 32px; font-size: 
   .info { padding: 30px 10px 10px; } .info b { font-size: 15px; } .info small { font-size: 12px; }
   .sec, footer { padding-left: 16px; padding-right: 16px; }
   .sec { padding-top: 80px; } .sec h2 { font-size: 40px; }
+  .about { grid-template-columns: 1fr; gap: 36px; } .about .lead { font-size: 30px; } .about-story { padding-top: 0; } .about-story p { font-size: 17px; }
   .group { margin-top: 64px; } .group h2 { font-size: 34px; padding: 0 16px; margin-bottom: 12px; }
 }
 </style>
@@ -86,7 +97,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 120px 8px 32px; font-size: 
 <body>
 
 <header class="top">
-  <a class="logo" href="#top" aria-label="AbdulAziz, videographer"><span class="mark" aria-hidden="true">Abdul<span class="box">Aziz</span><sup>TM</sup></span><small>Videographer</small></a>
+  <a class="logo" href="#top" aria-label="Abdul Aziz, videographer"><span class="mark" aria-hidden="true">Abdul<span class="box">Aziz</span><sup>TM</sup></span><small>Videographer</small></a>
   <nav aria-label="Sections">
     <a class="on" href="#productions">Work</a>
     <a href="#about">About</a>
@@ -95,7 +106,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 120px 8px 32px; font-size: 
 </header>
 
 <main id="top">
-  <h1 hidden>AbdulAziz: videographer, video editor, photographer and podcast producer in Kuwait</h1>
+  <h1 hidden>Abdul Aziz: videographer, video editor, photographer and podcast producer in Kuwait</h1>
   <section class="group" id="productions" aria-labelledby="productions-h">
     <h2 id="productions-h">Video Productions</h2>
     <ul class="films">
@@ -196,13 +207,23 @@ footer { max-width: 1180px; margin: 0 auto; padding: 120px 8px 32px; font-size: 
     </ul>
   </section>
 
-  <section class="sec" id="about">
-    <h2>About</h2>
-    <p class="lead">It all started as a passion.</p>
+  <section class="sec about" id="about" aria-labelledby="about-h">
+    <div class="about-side">
+      <h2 id="about-h">About</h2>
+      <p class="lead">It all started as a passion.</p>
+      <dl class="facts">
+        <div><dt>Based in</dt><dd>Kuwait</dd></div>
+        <div><dt>Camera</dt><dd>Sony FX3</dd></div>
+        <div><dt>Edit and colour</dt><dd>DaVinci Resolve</dd></div>
+        <div><dt>Work</dt><dd>Commercials, brand videos, restaurant content, podcasts and social media</dd></div>
+      </dl>
+    </div>
+    <div class="about-story">
     <p>I&rsquo;m Abdul Aziz, a videographer, video editor, and photographer based in Kuwait. I started with an Osmo Pocket 3, editing on CapCut, and an eagerness to learn. I wanted to understand how to get a better shot, how to bring footage together, and how small choices could change the feel of a video.</p>
     <p>As I gained experience, I moved to the Sony FX3 and DaVinci Resolve. Every project gave me something new to learn, both behind the camera and in the edit, helping me develop my approach to lighting, composition, colour, and sound.</p>
     <p>Since then, my work includes commercials, brand videos, restaurant content, podcasts, and social media content, alongside experience working with marketing teams and managing social media.</p>
     <p>I&rsquo;m still driven by the same eagerness that got me started. I enjoy trying new ideas, working with people, and seeing a project take shape from the first conversation to the final cut.</p>
+    </div>
   </section>
 
   <section class="sec" id="contact">
@@ -216,7 +237,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 120px 8px 32px; font-size: 
   </section>
 </main>
 
-<footer>&copy; 2026 AbdulAziz, Kuwait</footer>
+<footer>&copy; 2026 Abdul Aziz. Kuwait.</footer>
 
 <div class="viewer" id="viewer" hidden>
   <button class="close" id="viewer-close" type="button">Close</button>
