@@ -39,6 +39,31 @@ nav a.on, nav a:hover { border-bottom-color: #fff; }
 .film:hover .info, .film:focus-visible .info { opacity: 1; }
 @media (hover: none) { .info { opacity: 1; } }
 
+/* Podcasts and talking heads: a white studio section, and the episode plays right here */
+.talk { margin-top: 120px; background: #f3f3f1; color: #000; }
+.talk-in { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: start; max-width: 1240px; padding: 100px 36px 110px 8px; }
+.stage { position: relative; aspect-ratio: 9 / 16; overflow: hidden; background: #ddd; }
+.stage button { position: absolute; inset: 0; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+.stage img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.stage .go { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%; background: #000; color: #fff; transition: transform .2s; }
+.stage .go svg { width: 26px; height: 26px; margin-left: 4px; }
+.stage button:hover .go { transform: scale(1.08); }
+.stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
+.talk h2 { margin: 0; font-weight: 900; font-stretch: 62%; font-size: clamp(48px, 7vw, 96px); line-height: .9; text-transform: uppercase; }
+.talk .lead { max-width: 34ch; margin: 22px 0 0; font-size: 21px; line-height: 1.45; color: #333; }
+.now { margin: 44px 0 0; }
+.now small { display: block; font-size: 15px; color: #555; }
+.now b { display: block; margin-top: 4px; font-weight: 800; font-stretch: 75%; font-size: 40px; line-height: 1.05; }
+.eps { list-style: none; margin: 40px 0 0; padding: 0; border-top: 1.5px solid #000; }
+.eps button { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 18px; align-items: center; width: 100%; padding: 16px 0; border: 0; border-bottom: 1px solid #0003;
+  background: none; color: #000; font: 400 19px/1.3 "Archivo", sans-serif; text-align: left; cursor: pointer; }
+.eps .n { font-weight: 800; font-stretch: 75%; font-size: 26px; }
+.eps .t small { display: block; font-size: 15px; color: #555; }
+.eps .len { font-variant-numeric: tabular-nums; color: #555; }
+.eps button[aria-current="true"] .n::after { content: ""; display: inline-block; width: 8px; height: 8px; margin-left: 8px; vertical-align: middle; border-radius: 50%; background: #e2231a; }
+.eps button:hover .t { text-decoration: underline; text-underline-offset: 4px; }
+.talk :focus-visible { outline-color: #000; }
+
 /* About and contact */
 .sec { max-width: 760px; padding: 120px 36px 0 8px; }
 .sec h2 { margin: 0 0 18px; font-weight: 900; font-stretch: 62%; font-size: 48px; line-height: 1; text-transform: uppercase; }
@@ -57,7 +82,9 @@ footer { padding: 120px 36px 32px 8px; font-size: 14px; color: #8a8a8a; }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .film img, .info { transition: none; } }
 @media (max-width: 900px) { .films { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 800px) { .talk-in { grid-template-columns: 1fr; } .stage { max-width: 420px; } }
 @media (max-width: 700px) {
+  .talk { margin-top: 80px; } .talk-in { padding: 64px 16px 72px; } .now b { font-size: 32px; }
   .top { padding: 28px 16px 40px 12px; }
   .mark { font-size: 24px; } .logo small { font-size: 11px; margin-top: 5px; }
   nav { gap: 16px; } nav a { font-size: 18px; }
@@ -73,6 +100,7 @@ footer { padding: 120px 36px 32px 8px; font-size: 14px; color: #8a8a8a; }
   <a class="logo" href="#work" aria-label="AbdulAziz, videographer"><span class="mark" aria-hidden="true">Abdul<span class="box">Aziz</span><sup>TM</sup></span><small>Videographer</small></a>
   <nav aria-label="Sections">
     <a class="on" href="#work">Work</a>
+    <a href="#podcasts">Podcasts</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -123,6 +151,24 @@ footer { padding: 120px 36px 32px 8px; font-size: 14px; color: #8a8a8a; }
     </a></li>
   </ul>
 
+  <section class="talk" id="podcasts" aria-labelledby="pod-h">
+    <div class="talk-in">
+      <div class="stage" id="stage">
+        <noscript><a href="https://vimeo.com/1233541493"><img src="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_640" alt="ProBar Challenge, episode 1"></a></noscript>
+      </div>
+      <div>
+        <h2 id="pod-h">Podcasts &amp;<br>talking heads</h2>
+        <p class="lead">Real people, real reactions. Series filmed in the studio and cut for social media.</p>
+        <p class="now" aria-live="polite"><small id="now-show"></small><b id="now-title"></b></p>
+        <!-- To add an episode: add it to EPISODES in the build script, or copy one <li> and change the Vimeo number, poster and words. -->
+        <ol class="eps">
+          <li><button type="button" data-vimeo="1233541493" data-show="Prolife" data-title="ProBar Challenge, episode 1" data-poster="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_640" aria-current="true">
+            <span class="n">01</span><span class="t">ProBar Challenge, episode 1<small>Prolife</small></span><span class="len">2:58</span></button></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
   <section class="sec" id="about">
     <h2>About</h2>
     <p>AbdulAziz is a videographer, video editor, photographer and podcast producer based in Kuwait.</p>
@@ -172,6 +218,23 @@ footer { padding: 120px 36px 32px 8px; font-size: 14px; color: #8a8a8a; }
     if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
   }
   $('viewer-close').addEventListener('click', closeViewer);
+
+  // Podcasts: the chosen episode plays inside the white section, not in a pop-up.
+  var stage = $('stage');
+  function cue(btn, start) {
+    document.querySelectorAll('.eps button').forEach(function (b) { b.setAttribute('aria-current', String(b === btn)); });
+    $('now-show').textContent = btn.dataset.show;
+    $('now-title').textContent = btn.dataset.title;
+    if (start) {
+      stage.innerHTML = '<iframe src="https://player.vimeo.com/video/' + btn.dataset.vimeo + '?autoplay=1&dnt=1&title=0&byline=0&portrait=0" title="' + btn.dataset.title + '" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>';
+    } else {
+      stage.innerHTML = '<button type="button" aria-label="Play ' + btn.dataset.title + '"><img src="' + btn.dataset.poster + '" alt="" loading="lazy" decoding="async"><span class="go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></button>';
+    }
+  }
+  var eps = document.querySelectorAll('.eps button');
+  eps.forEach(function (b) { b.addEventListener('click', function () { cue(b, true); }); });
+  stage.addEventListener('click', function (e) { if (e.target.closest('button')) cue(document.querySelector('.eps button[aria-current="true"]'), true); });
+  if (eps.length) cue(eps[0], false);
   $('viewer').addEventListener('click', function (e) { if (e.target.id === 'viewer') closeViewer(); });
   addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('viewer').hidden) closeViewer(); });
 })();
