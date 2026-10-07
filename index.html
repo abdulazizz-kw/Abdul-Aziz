@@ -5,49 +5,60 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Aziz Visuals</title>
 <meta name="description" content="Aziz: videographer, video editor, photographer and podcast producer in Kuwait.">
-<!-- The boards are pre-rendered images of their design files in design/ (run `npm run render` after editing one).
-     Laptops get pages 1 and 2 (design/page1.html, page2.html); phones get one tall board (design/phone.html).
-     Each screen downloads only its own images, in the size that fits. Videos only load when someone presses play. -->
-<link rel="preload" as="image" href="images/page1-1400.webp" fetchpriority="high" media="(min-width: 761px)"
-      imagesrcset="images/page1-1000.webp 1000w, images/page1-1400.webp 1400w, images/page1-2000.webp 2000w" imagesizes="100vw">
+<!-- The board is a pre-rendered image of design/phone.html (run `npm run render` after editing it).
+     Phones and laptops each download only the size that fits. Videos only load when someone presses play. -->
 <link rel="preload" as="image" href="images/phone-750.webp" fetchpriority="high" media="(max-width: 760px)"
       imagesrcset="images/phone-750.webp 750w, images/phone-1125.webp 1125w" imagesizes="100vw">
+<link rel="preload" as="image" href="images/phone-1500.webp" fetchpriority="high" media="(min-width: 761px)"
+      imagesrcset="images/phone-1125.webp 1125w, images/phone-1500.webp 1500w" imagesizes="700px">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Inter:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap">
 <style>
 html, body { margin: 0; background: #1b1b1a; }
 [hidden] { display: none !important; }
 .page { position: relative; }
-.board { position: relative; container-type: inline-size; }
+.board { position: relative; max-width: 700px; margin: 0 auto; }
 .art { display: block; width: 100%; height: auto; }
-.phone { display: none; }
 .anchor { position: absolute; left: 0; width: 1px; height: 1px; }
 .sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+/* Laptops: the board stands in the middle, and a soft, blurred glow of the same picture (already downloaded) fills the sides. */
+@media (min-width: 761px) {
+  .page { isolation: isolate; overflow: hidden; background: #15110d; }
+  .page::before { content: ""; position: absolute; inset: -120px; z-index: -1;
+    background: url(images/phone-1125.webp) center / 100% 100% no-repeat;
+    background-image: -webkit-image-set(url(images/phone-1125.webp) 1x, url(images/phone-1500.webp) 2x);
+    background-image: image-set(url(images/phone-1125.webp) 1x, url(images/phone-1500.webp) 2x);
+    filter: blur(70px) brightness(.42) saturate(1.15); }
+  .page::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse 75% 60% at 50% 40%, #0000 35%, #0b0907b0 100%); }
+  .board .art { -webkit-mask-image: linear-gradient(90deg, #0000, #000 3.5%, #000 96.5%, #0000); mask-image: linear-gradient(90deg, #0000, #000 3.5%, #000 96.5%, #0000); }
+}
 
-/* Clickable areas over the artwork (positions measured from the design files). */
+/* Clickable areas over the artwork (positions measured from the design file). */
 .hot { position: absolute; border-radius: 6px; }
 .hot:focus-visible { outline: 2px solid #fff; box-shadow: 0 0 0 5px #1d1a17; }
 .hot[data-play] { cursor: pointer; }
 
-/* "Available for hire" bar: placed exactly as in the design on wider screens (sizes in cqw scale with the page). */
-.hire { position: absolute; left: 23.5%; top: 84.215%; width: 51.9cqw; height: 6.5cqw; box-sizing: border-box;
-  display: flex; align-items: center; gap: .8cqw; padding: 0 1.95cqw 0 1.5cqw; border-radius: .7cqw;
+/* "Available for hire" bar: stays at the bottom of the screen. */
+.hire { position: fixed; z-index: 10; left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); box-sizing: border-box;
+  display: flex; align-items: center; gap: 10px; padding: 10px 40px 10px 10px; border-radius: 14px;
   background: linear-gradient(100deg, #36332df3 0%, #33302bf4 45%, #2b2620f6 100%); color: #f6f4f1;
-  box-shadow: 0 1.2cqw 2.5cqw -.9cqw #000c, inset 0 1px 0 #ffffff14;
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; }
-.hire .avatar { position: relative; flex: none; width: 3.5cqw; height: 3.5cqw; border-radius: 50%; overflow: hidden; background: #9b968f; }
+  box-shadow: 0 10px 30px -10px #000c, inset 0 1px 0 #ffffff14;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+.hire .avatar { position: relative; flex: none; width: 40px; height: 40px; border-radius: 50%; overflow: hidden; background: #9b968f; }
 .hire .avatar > svg, .hire .avatar > img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
-.hire p { flex: 1; margin: 0 0 0 .4cqw; font-weight: 600; font-size: 1.25cqw; line-height: 1.2; letter-spacing: -.004em; }
-.pill { display: inline-flex; align-items: center; justify-content: center; gap: .6cqw; height: 2.4cqw; padding: 0 1.5cqw; border-radius: 1.2cqw;
-  font-weight: 500; font-size: 1.05cqw; line-height: 1; white-space: nowrap; text-decoration: none; transition: transform .2s; }
+.hire p { flex: 1; margin: 0; font-weight: 600; font-size: 15px; line-height: 1.2; }
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 0 16px; border-radius: 18px;
+  font-weight: 500; font-size: 14px; line-height: 1; white-space: nowrap; text-decoration: none; transition: transform .2s; }
 .pill:hover { transform: translateY(-2px); }
-.pill-light { background: #fff; color: #141414; min-width: 9.7cqw; box-sizing: border-box; }
-.pill-dark { background: #111; color: #fff; min-width: 12.8cqw; padding: 0 1.4cqw 0 1.3cqw; box-sizing: border-box; }
-.pill-dark svg { width: 1.4cqw; height: 1.4cqw; flex: none; }
-.hire .x { position: absolute; right: .45cqw; top: .55cqw; width: 1.3cqw; height: 1.3cqw; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: none; color: #f2f0ec; cursor: pointer; }
-.hire .x svg { width: .7cqw; height: .7cqw; }
+.pill-light { background: #fff; color: #141414; }
+.pill-dark { background: #111; color: #fff; }
+.pill-dark svg { width: 18px; height: 18px; flex: none; }
+.hire .x { position: absolute; right: 8px; top: 50%; margin-top: -13px; width: 26px; height: 26px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: none; color: #f2f0ec; cursor: pointer; }
+.hire .x svg { width: 12px; height: 12px; }
 .hire :focus-visible { outline: 3px solid #f2e9a8; outline-offset: 3px; }
+body.has-hire { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+@media (min-width: 761px) { .hire { left: 50%; right: auto; width: 680px; transform: translateX(-50%); } }
 
 /* ---------- The work: every video, pinned to the chalkboard ---------- */
 .work { padding: clamp(40px, 6vw, 90px) clamp(16px, 4vw, 56px) clamp(64px, 8vw, 120px); color: #ecebe6;
@@ -95,21 +106,8 @@ html, body { margin: 0; background: #1b1b1a; }
 @media (prefers-reduced-motion: reduce) { .tile, .tile:hover, .tile:focus-within { transition: none; } }
 @media (max-width: 1100px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 860px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-/* Phones: the tall phone board replaces pages 1 and 2, and the bar sits at the bottom of the screen at a readable size, in the phone's own font. */
-@media (max-width: 760px) {
-  .phone { display: block; }
-  #p1 .art, #p1 .hot, #p2 { display: none; }
-  .hire { position: fixed; z-index: 10; left: 10px; right: 10px; top: auto; bottom: calc(10px + env(safe-area-inset-bottom, 0px));
-    width: auto; height: auto; gap: 10px; padding: 10px 40px 10px 10px; border-radius: 14px; box-shadow: 0 10px 30px -10px #000c;
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
-  .hire .avatar { width: 40px; height: 40px; }
-  .hire p { font-size: 15px; margin: 0; }
-  .pill { height: 36px; padding: 0 16px; border-radius: 18px; font-size: 14px; min-width: 0; }
-  .pill-dark { display: none; }
-  .hire .x { right: 8px; top: 50%; margin-top: -13px; width: 26px; height: 26px; }
-  .hire .x svg { width: 12px; height: 12px; }
-  body.has-hire { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
-}
+/* Phones: no room for "Save Contact" in the bar. */
+@media (max-width: 760px) { .pill-dark { display: none; } }
 @media (max-width: 560px) {
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 14px; }
   .tile { transform: rotate(calc(var(--r) * .5)); }
@@ -119,51 +117,21 @@ html, body { margin: 0; background: #1b1b1a; }
 </head>
 <body class="has-hire">
 
-<section class="page" id="p1">
+<!-- The case file and the film strips on one tall board (design/phone.html). -->
+<section class="page" id="top">
   <div class="board">
     <picture>
-      <source media="(max-width: 760px)" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-      <img class="art" src="images/page1-1400.webp"
-           srcset="images/page1-1000.webp 1000w, images/page1-1400.webp 1400w, images/page1-2000.webp 2000w"
-           sizes="100vw" width="2000" height="1134" alt="" fetchpriority="high" decoding="async">
+      <source media="(min-width: 761px)" srcset="images/phone-1125.webp 1125w, images/phone-1500.webp 1500w" sizes="700px">
+      <img class="art" src="images/phone-750.webp" srcset="images/phone-750.webp 750w, images/phone-1125.webp 1125w"
+           sizes="100vw" width="1000" height="2911" alt="" fetchpriority="high" decoding="async">
     </picture>
-
     <h1 class="sr">Aziz: Portfolio 2026</h1>
     <div class="sr">
       <p>Case File #965: The Visual Storyteller</p>
-      <p>He is known as a Visual Storyteller.</p>
+      <p>He is known as &ldquo;The Visual Storyteller.&rdquo;</p>
       <p>Where was he last seen?</p>
       <p>The last thing he said was, let&rsquo;s make it move.</p>
     </div>
-
-    <a class="hot" href="#work" style="left:13.95%;top:33.95%;width:19.2%;height:13.58%"><span class="sr">Video Editing</span></a>
-    <a class="hot" href="#work" style="left:25.7%;top:56.97%;width:9.95%;height:9.35%"><span class="sr">Video Graphy</span></a>
-    <a class="hot" href="https://vimeo.com/1233530193" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Deboned" style="left:14.01%;top:58.88%;width:10.88%;height:15.23%"></a>
-    <a class="hot" href="#work" style="left:66.8%;top:47.09%;width:17.35%;height:10.93%"><span class="sr">Photography</span></a>
-    <a class="hot" href="#p2" style="left:69.65%;top:73.19%;width:11.55%;height:23.37%"><span class="sr">Find out about him</span></a>
-    <a class="hot" href="#work" style="left:22.4%;top:85.8%;width:7.4%;height:4.85%"><span class="sr">Podcasts</span></a>
-
-    <aside class="hire" aria-label="Availability">
-      <span class="avatar slot-avatar">
-        <!-- Replace with your photo: <img src="your-face.jpg" alt="Aziz"> -->
-        <svg viewBox="0 0 70 70" aria-hidden="true" focusable="false"><rect width="70" height="70" fill="#9d9891"/><path d="M8 70 C10 57 20 52 28 50 L29 45 C24 42 21 37 21 30 C21 21 27 15 35 15 C43 15 49 21 49 30 C49 37 46 42 41 45 L42 50 C50 52 60 57 62 70 Z" fill="#2c2926"/></svg>
-      </span>
-      <p>Aziz is available for hire</p>
-      <a class="pill pill-light" href="#contact">Hire Aziz</a>
-      <a class="pill pill-dark" href="#contact"><svg viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5h12a1.5 1.5 0 0 1 1.5 1.5v19.5l-7.5-4.5-7.5 4.5V5A1.5 1.5 0 0 1 8 3.5z"/><circle cx="14" cy="10" r="2.6"/><path d="M9.6 16.2c.8-2 2.4-3 4.4-3s3.6 1 4.4 3"/></svg>Save Contact</a>
-      <button class="x" type="button" aria-label="Close the availability bar"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2 L12 12 M12 2 L2 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-    </aside>
-  </div>
-</section>
-
-<!-- Phones only: the whole case file and the film strips on one tall board (design/phone.html). -->
-<section class="page phone" id="ph">
-  <div class="board">
-    <picture>
-      <source media="(min-width: 761px)" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-      <img class="art" src="images/phone-750.webp" srcset="images/phone-750.webp 750w, images/phone-1125.webp 1125w"
-           sizes="100vw" width="1125" height="3275" alt="" fetchpriority="high" decoding="async">
-    </picture>
     <span class="anchor" id="films" style="top:32%"></span>
     <h2 class="sr">Videography</h2>
     <div class="sr">
@@ -191,34 +159,17 @@ html, body { margin: 0; background: #1b1b1a; }
     <a class="hot" href="https://vimeo.com/1233530186" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Dice: Football Sequence" style="left:0%;top:57.263%;width:16.485%;height:8.664%"></a>
     <a class="hot" href="https://vimeo.com/1233530113" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Ever" style="left:83.751%;top:69.385%;width:16.249%;height:7.984%"></a>
     <a class="hot" href="https://vimeo.com/1233530206" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Dar Hamad" style="left:8.144%;top:80.179%;width:11.909%;height:6.183%"></a>
-  </div>
-</section>
 
-<section class="page" id="p2">
-  <div class="board">
-    <picture>
-      <source media="(max-width: 760px)" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-      <img class="art" src="images/page2-1400.webp"
-           srcset="images/page2-1000.webp 1000w, images/page2-1400.webp 1400w, images/page2-2000.webp 2000w"
-           sizes="100vw" width="2000" height="976" alt="" loading="lazy" decoding="async">
-    </picture>
-    <h2 class="sr">Videography</h2>
-    <div class="sr">
-      <p>In this film, he works as writer, director, camera operator and editor, from the first idea to the final cut.</p>
-      <p>This is a commercial made to launch a new product, shot and edited for social media.</p>
-      <p>This is a brand film that tells the story behind the brand in under a minute.</p>
-      <p>This is a restaurant series, shot and edited for social media.</p>
-      <p>This project was shot in one day with a small crew.</p>
-      <p>This one is his favourite. Ask him about it.</p>
-    </div>
-    <!-- Each film frame plays its video -->
-    <a class="hot" href="https://vimeo.com/1233530243" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Butterfly Chocolate" style="left:16.01%;top:24.74%;width:16.11%;height:27.02%"></a>
-    <a class="hot" href="https://vimeo.com/1233530156" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Dice" style="left:32.09%;top:28.05%;width:14.1%;height:22.38%"></a>
-    <a class="hot" href="https://vimeo.com/1233530096" target="_blank" rel="noopener" data-play aria-label="Play JUL: Less Waiting, More Skating" style="left:45.88%;top:32.57%;width:14.52%;height:22.44%"></a>
-    <a class="hot" href="https://vimeo.com/1233530092" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Madison &amp; Heig" style="left:56.34%;top:66.89%;width:15.54%;height:22.71%"></a>
-    <a class="hot" href="https://vimeo.com/1233530098" target="_blank" rel="noopener" data-play data-vertical aria-label="Play JUL: One Shot" style="left:72.46%;top:61.83%;width:16.4%;height:26.47%"></a>
-    <a class="hot" href="https://vimeo.com/1233530186" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Dice: Football Sequence" style="left:73.51%;top:35.23%;width:14.89%;height:21.2%"></a>
-    <a class="hot" href="https://vimeo.com/1233530206" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Dar Hamad" style="left:62.32%;top:38.35%;width:14.4%;height:19.62%"></a>
+    <aside class="hire" aria-label="Availability">
+      <span class="avatar slot-avatar">
+        <!-- Replace with your photo: <img src="your-face.jpg" alt="Aziz"> -->
+        <svg viewBox="0 0 70 70" aria-hidden="true" focusable="false"><rect width="70" height="70" fill="#9d9891"/><path d="M8 70 C10 57 20 52 28 50 L29 45 C24 42 21 37 21 30 C21 21 27 15 35 15 C43 15 49 21 49 30 C49 37 46 42 41 45 L42 50 C50 52 60 57 62 70 Z" fill="#2c2926"/></svg>
+      </span>
+      <p>Aziz is available for hire</p>
+      <a class="pill pill-light" href="#contact">Hire Aziz</a>
+      <a class="pill pill-dark" href="#contact"><svg viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5h12a1.5 1.5 0 0 1 1.5 1.5v19.5l-7.5-4.5-7.5 4.5V5A1.5 1.5 0 0 1 8 3.5z"/><circle cx="14" cy="10" r="2.6"/><path d="M9.6 16.2c.8-2 2.4-3 4.4-3s3.6 1 4.4 3"/></svg>Save Contact</a>
+      <button class="x" type="button" aria-label="Close the availability bar"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2 L12 12 M12 2 L2 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    </aside>
   </div>
 </section>
 
