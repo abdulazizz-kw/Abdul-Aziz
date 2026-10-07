@@ -35,6 +35,7 @@ nav a.on, nav a:hover { border-bottom-color: #fff; }
 .show .info b { font-size: 28px; }
 /* Sections of vertical films, each with its own heading */
 .group { margin-top: 96px; }
+.group:first-of-type { margin-top: 0; }
 .group h2 { max-width: 1180px; margin: 0 auto 18px; padding: 0 8px; font-weight: 900; font-stretch: 62%; font-size: 48px; line-height: 1; text-transform: uppercase; }
 /* The vertical films: three across on laptops, two on tablets and phones */
 .films { list-style: none; max-width: 1180px; margin: 0 auto; padding: 0 8px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
@@ -84,25 +85,23 @@ footer { max-width: 1180px; margin: 0 auto; padding: 120px 8px 32px; font-size: 
 <body>
 
 <header class="top">
-  <a class="logo" href="#work" aria-label="AbdulAziz, videographer"><span class="mark" aria-hidden="true">Abdul<span class="box">Aziz</span><sup>TM</sup></span><small>Videographer</small></a>
+  <a class="logo" href="#top" aria-label="AbdulAziz, videographer"><span class="mark" aria-hidden="true">Abdul<span class="box">Aziz</span><sup>TM</sup></span><small>Videographer</small></a>
   <nav aria-label="Sections">
-    <a class="on" href="#work">Work</a>
+    <a class="on" href="#productions">Work</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
 
-<main>
+<main id="top">
   <h1 hidden>AbdulAziz: videographer, video editor, photographer and podcast producer in Kuwait</h1>
-  <div class="show" id="work">
-    <a class="film" href="https://vimeo.com/1233530096" target="_blank" rel="noopener" data-play>
-      <img src="https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_1280" srcset="https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_960 960w, https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_1280 1280w, https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_1920 1920w" sizes="100vw" alt="" width="1280" height="720" fetchpriority="high" decoding="async" style="object-position:50% 50%">
-      <span class="info"><b>JUL: Less Waiting, More Skating</b><small>Brand film</small></span>
-    </a>
-  </div>
   <section class="group" id="productions" aria-labelledby="productions-h">
     <h2 id="productions-h">Video Productions</h2>
     <ul class="films">
+      <li><a class="film" href="https://vimeo.com/1233530096" target="_blank" rel="noopener" data-play>
+        <img src="https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_640" srcset="https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_640 640w, https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_960 960w, https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:95% 50%">
+        <span class="info"><b>JUL: Less Waiting, More Skating</b><small>Brand film</small></span>
+      </a></li>
       <li><a class="film" href="https://vimeo.com/1233530243" target="_blank" rel="noopener" data-play data-vertical>
         <img src="https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_640" srcset="https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_640 640w, https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_960 960w, https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
         <span class="info"><b>Butterfly Chocolate</b><small>Commercial</small></span>
@@ -142,6 +141,10 @@ footer { max-width: 1180px; margin: 0 auto; padding: 120px 8px 32px; font-size: 
       <li><a class="film" href="https://vimeo.com/1233530016" target="_blank" rel="noopener" data-play data-vertical>
         <img src="https://i.vimeocdn.com/video/2209224042-dbd2b6b4c570ff8b8d20bd009dcd8dbf48565c11b0d18b8b6e958b92148242e9-d_640" srcset="https://i.vimeocdn.com/video/2209224042-dbd2b6b4c570ff8b8d20bd009dcd8dbf48565c11b0d18b8b6e958b92148242e9-d_640 640w, https://i.vimeocdn.com/video/2209224042-dbd2b6b4c570ff8b8d20bd009dcd8dbf48565c11b0d18b8b6e958b92148242e9-d_960 960w, https://i.vimeocdn.com/video/2209224042-dbd2b6b4c570ff8b8d20bd009dcd8dbf48565c11b0d18b8b6e958b92148242e9-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
         <span class="info"><b>Milk Bun: Final Cut</b><small>Commercial</small></span>
+      </a></li>
+      <li><a class="film" href="https://vimeo.com/1233815220" target="_blank" rel="noopener" data-play>
+        <img src="https://i.vimeocdn.com/video/2209597927-97f44188bbaaebb57f2b45c58b5cca74533465e910eb2ce19763f4f6063fbce9-d_640" srcset="https://i.vimeocdn.com/video/2209597927-97f44188bbaaebb57f2b45c58b5cca74533465e910eb2ce19763f4f6063fbce9-d_640 640w, https://i.vimeocdn.com/video/2209597927-97f44188bbaaebb57f2b45c58b5cca74533465e910eb2ce19763f4f6063fbce9-d_960 960w, https://i.vimeocdn.com/video/2209597927-97f44188bbaaebb57f2b45c58b5cca74533465e910eb2ce19763f4f6063fbce9-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
+        <span class="info"><b>Milk Bun: Delivery To Go!</b><small>Commercial</small></span>
       </a></li>
       <li><a class="film" href="https://vimeo.com/1233529891" target="_blank" rel="noopener" data-play data-vertical>
         <img src="https://i.vimeocdn.com/video/2209223905-1c7f7556d9b6b05b754714a66eed60a33148ecc86d01ae6a3f332f1bf6ef56b5-d_640" srcset="https://i.vimeocdn.com/video/2209223905-1c7f7556d9b6b05b754714a66eed60a33148ecc86d01ae6a3f332f1bf6ef56b5-d_640 640w, https://i.vimeocdn.com/video/2209223905-1c7f7556d9b6b05b754714a66eed60a33148ecc86d01ae6a3f332f1bf6ef56b5-d_960 960w, https://i.vimeocdn.com/video/2209223905-1c7f7556d9b6b05b754714a66eed60a33148ecc86d01ae6a3f332f1bf6ef56b5-d_1280 1280w" sizes="(max-width: 900px) 50vw, 33vw" alt="" width="640" height="1138" loading="lazy" decoding="async" style="object-position:50% 50%">
