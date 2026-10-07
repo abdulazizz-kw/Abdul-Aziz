@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Aziz Visuals</title>
 <meta name="description" content="Aziz: videographer, video editor, photographer and podcast producer in Kuwait.">
-<!-- Pages 1 and 2 are pre-rendered images of their design files in design/ (run `npm run render` after editing one).
-     The browser picks the image size that fits the screen. Videos only load when someone presses play. -->
-<link rel="preload" as="image" href="images/page1-1400.webp" fetchpriority="high"
-      imagesrcset="images/page1-1000.webp 1000w, images/page1-1400.webp 1400w, images/page1-2000.webp 2000w" imagesizes="(max-width: 760px) 34vw, 100vw">
+<!-- The boards are pre-rendered images of their design files in design/ (run `npm run render` after editing one).
+     Laptops get pages 1 and 2 (design/page1.html, page2.html); phones get one tall board (design/phone.html).
+     Each screen downloads only its own images, in the size that fits. Videos only load when someone presses play. -->
+<link rel="preload" as="image" href="images/page1-1400.webp" fetchpriority="high" media="(min-width: 761px)"
+      imagesrcset="images/page1-1000.webp 1000w, images/page1-1400.webp 1400w, images/page1-2000.webp 2000w" imagesizes="100vw">
+<link rel="preload" as="image" href="images/phone-750.webp" fetchpriority="high" media="(max-width: 760px)"
+      imagesrcset="images/phone-750.webp 750w, images/phone-1125.webp 1125w" imagesizes="100vw">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Inter:wght@500;600&display=swap">
@@ -18,6 +21,8 @@ html, body { margin: 0; background: #1b1b1a; }
 .page { position: relative; }
 .board { position: relative; container-type: inline-size; }
 .art { display: block; width: 100%; height: auto; }
+.phone { display: none; }
+.anchor { position: absolute; left: 0; width: 1px; height: 1px; }
 .sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 
 /* Clickable areas over the artwork (positions measured from the design files). */
@@ -90,8 +95,10 @@ html, body { margin: 0; background: #1b1b1a; }
 @media (prefers-reduced-motion: reduce) { .tile, .tile:hover, .tile:focus-within { transition: none; } }
 @media (max-width: 1100px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 860px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-/* Phones: the bar sits at the bottom of the screen at a readable size, in the phone's own font. */
+/* Phones: the tall phone board replaces pages 1 and 2, and the bar sits at the bottom of the screen at a readable size, in the phone's own font. */
 @media (max-width: 760px) {
+  .phone { display: block; }
+  #p1 .art, #p1 .hot, #p2 { display: none; }
   .hire { position: fixed; z-index: 10; left: 10px; right: 10px; top: auto; bottom: calc(10px + env(safe-area-inset-bottom, 0px));
     width: auto; height: auto; gap: 10px; padding: 10px 40px 10px 10px; border-radius: 14px; box-shadow: 0 10px 30px -10px #000c;
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
@@ -114,9 +121,12 @@ html, body { margin: 0; background: #1b1b1a; }
 
 <section class="page" id="p1">
   <div class="board">
-    <img class="art" src="images/page1-1400.webp"
-         srcset="images/page1-1000.webp 1000w, images/page1-1400.webp 1400w, images/page1-2000.webp 2000w"
-         sizes="(max-width: 760px) 34vw, 100vw" width="2000" height="1134" alt="" fetchpriority="high" decoding="async">
+    <picture>
+      <source media="(max-width: 760px)" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+      <img class="art" src="images/page1-1400.webp"
+           srcset="images/page1-1000.webp 1000w, images/page1-1400.webp 1400w, images/page1-2000.webp 2000w"
+           sizes="100vw" width="2000" height="1134" alt="" fetchpriority="high" decoding="async">
+    </picture>
 
     <h1 class="sr">Aziz: Portfolio 2026</h1>
     <div class="sr">
@@ -146,11 +156,52 @@ html, body { margin: 0; background: #1b1b1a; }
   </div>
 </section>
 
+<!-- Phones only: the whole case file and the film strips on one tall board (design/phone.html). -->
+<section class="page phone" id="ph">
+  <div class="board">
+    <picture>
+      <source media="(min-width: 761px)" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+      <img class="art" src="images/phone-750.webp" srcset="images/phone-750.webp 750w, images/phone-1125.webp 1125w"
+           sizes="100vw" width="1125" height="3275" alt="" fetchpriority="high" decoding="async">
+    </picture>
+    <span class="anchor" id="films" style="top:32%"></span>
+    <h2 class="sr">Videography</h2>
+    <div class="sr">
+      <p>This is a selection of projects, shot and edited for social media.</p>
+      <p>01, short film: from the first idea to the final cut. A story about people, places and the in-between.</p>
+      <p>02, product commercial: a new product, a new story. Shot and edited for a modern brand on social media.</p>
+      <p>03, brand film: a whole world in under a minute. A brand film that tells the story behind the brand.</p>
+      <p>04, restaurant series: small crew, one day, every detail. Real food, real people, real stories.</p>
+      <p>Let&rsquo;s make it move. Aziz Visuals, visual storytelling.</p>
+    </div>
+    <!-- Each photo plays its video -->
+    <a class="hot" href="#work" style="left:72.939%;top:17.052%;width:19.522%;height:4.646%"><span class="sr">Photography</span></a>
+    <a class="hot" href="#work" style="left:20.789%;top:23.57%;width:27.023%;height:6.38%"><span class="sr">Podcasts</span></a>
+    <a class="hot" href="#work" style="left:8.038%;top:10.679%;width:25.725%;height:3.583%"><span class="sr">Video Editing</span></a>
+    <a class="hot" href="#work" style="left:7.027%;top:19.237%;width:23.545%;height:2.887%"><span class="sr">Videography</span></a>
+    <a class="hot" href="#work" style="left:67.607%;top:13.381%;width:28.986%;height:4.087%"><span class="sr">Photography</span></a>
+    <a class="hot" href="#work" style="left:14.775%;top:22.559%;width:21.651%;height:2.975%"><span class="sr">Podcasts</span></a>
+    <a class="hot" href="#films" style="left:70.332%;top:21.517%;width:22.336%;height:9.595%"><span class="sr">Find out about him</span></a>
+    <a class="hot" href="https://vimeo.com/1233530092" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Madison &amp; Heig" style="left:7.673%;top:15.086%;width:22.654%;height:4.867%"></a>
+    <a class="hot" href="https://vimeo.com/1233530243" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Butterfly Chocolate" style="left:9.081%;top:46.458%;width:46.014%;height:8.748%"></a>
+    <a class="hot" href="https://vimeo.com/1233530156" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Dice" style="left:45.355%;top:57.838%;width:47.515%;height:8.676%"></a>
+    <a class="hot" href="https://vimeo.com/1233530096" target="_blank" rel="noopener" data-play aria-label="Play JUL: Less Waiting, More Skating" style="left:7.19%;top:68.696%;width:49.047%;height:8.817%"></a>
+    <a class="hot" href="https://vimeo.com/1233530098" target="_blank" rel="noopener" data-play data-vertical aria-label="Play JUL: One Shot" style="left:22.434%;top:81.367%;width:36.527%;height:7.857%"></a>
+    <a class="hot" href="https://vimeo.com/1233530193" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Deboned" style="left:83.723%;top:46.398%;width:16.277%;height:7.925%"></a>
+    <a class="hot" href="https://vimeo.com/1233530186" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Dice: Football Sequence" style="left:0%;top:57.263%;width:16.485%;height:8.664%"></a>
+    <a class="hot" href="https://vimeo.com/1233530113" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Ever" style="left:83.751%;top:69.385%;width:16.249%;height:7.984%"></a>
+    <a class="hot" href="https://vimeo.com/1233530206" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Dar Hamad" style="left:8.144%;top:80.179%;width:11.909%;height:6.183%"></a>
+  </div>
+</section>
+
 <section class="page" id="p2">
   <div class="board">
-    <img class="art" src="images/page2-1400.webp"
-         srcset="images/page2-1000.webp 1000w, images/page2-1400.webp 1400w, images/page2-2000.webp 2000w"
-         sizes="(max-width: 760px) 34vw, 100vw" width="2000" height="976" alt="" loading="lazy" decoding="async">
+    <picture>
+      <source media="(max-width: 760px)" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+      <img class="art" src="images/page2-1400.webp"
+           srcset="images/page2-1000.webp 1000w, images/page2-1400.webp 1400w, images/page2-2000.webp 2000w"
+           sizes="100vw" width="2000" height="976" alt="" loading="lazy" decoding="async">
+    </picture>
     <h2 class="sr">Videography</h2>
     <div class="sr">
       <p>In this film, he works as writer, director, camera operator and editor, from the first idea to the final cut.</p>
