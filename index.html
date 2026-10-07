@@ -63,13 +63,8 @@ body.has-hire { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
 .work h2 { margin: 0; font: 700 clamp(44px, 7vw, 96px)/.95 "Gaegu", "Segoe Print", "Comic Sans MS", cursive; color: #f1f0ea; text-shadow: 0 0 1px #fff9, 0 0 14px #ffffff12; }
 .work h2 small { font-size: .38em; vertical-align: top; margin-left: .3em; color: #e0605c; }
 .work-sub { margin: 8px 0 0; font: 700 clamp(18px, 1.6vw, 24px)/1.3 "Gaegu", "Segoe Print", cursive; color: #c9c7bf; }
-.chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
-.chip { font: 700 18px/1 "Gaegu", "Segoe Print", cursive; color: #ecebe6; background: none; border: 2px solid #ecebe673; border-radius: 999px; padding: 8px 16px 9px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
-.chip:hover { border-color: #ecebe6; }
-.chip[aria-pressed="true"] { background: #ecebe6; color: #1b1b1a; border-color: #ecebe6; }
-.chip:focus-visible { outline: 3px solid #f1e59a; outline-offset: 3px; }
-.grid { list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 46px 26px; }
-.tile { transform: rotate(var(--r)); transition: transform .25s; }
+.grid { list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 18px; align-items: start; }
+.tile { transform: rotate(calc(var(--r) * .35)); transition: transform .25s; }
 .tile:hover, .tile:focus-within { transform: rotate(0deg) translateY(-6px); }
 .snap { position: relative; display: block; padding: 8px 8px 0; border-radius: 2px; color: #1d1a17; text-decoration: none;
   background: #f2efe8; box-shadow: 0 20px 32px -18px #000, 0 2px 4px #0007; }
@@ -83,7 +78,7 @@ body.has-hire { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
 .pin::after { content: ""; position: absolute; left: 3px; top: 0; width: 24px; height: 24px; border-radius: 50%;
   background: radial-gradient(circle at 32% 25%, #ffaaa3 0%, #ee6867 18%, #d33e48 48%, #98222d 85%);
   box-shadow: inset -2px -3px 3px #79192380, 1px 3px 3px #0004; }
-.photo { position: relative; display: block; aspect-ratio: 9 / 16; overflow: hidden; background: #2a2826; }
+.photo { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: #2a2826; }
 .photo img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.92) contrast(1.03); }
 .play { position: absolute; left: 10px; bottom: 10px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
   background: #c8373c; color: #fff; box-shadow: 0 4px 10px #0007; transition: transform .2s; }
@@ -107,13 +102,14 @@ body.has-hire { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
 .viewer .close:focus-visible { outline: 3px solid #f1e59a; outline-offset: 3px; }
 
 @media (prefers-reduced-motion: reduce) { .tile, .tile:hover, .tile:focus-within { transition: none; } }
-@media (max-width: 1100px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media (max-width: 860px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 /* Phones: no room for "Save Contact" in the bar. */
-@media (max-width: 760px) { .pill-dark { display: none; } }
+@media (max-width: 760px) {
+  .pill-dark { display: none; }
+  .grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .work { padding-left: 20px; padding-right: 20px; }
+}
 @media (max-width: 560px) {
-  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 14px; }
-  .tile { transform: rotate(calc(var(--r) * .5)); }
+  .tile { transform: rotate(calc(var(--r) * .2)); }
   .play { width: 34px; height: 34px; left: 8px; bottom: 8px; }
 }
 </style>
@@ -180,83 +176,75 @@ body.has-hire { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
   <div class="work-in">
     <h2>The work<small>(10)</small></h2>
     <p class="work-sub">Tap a photo to play the video.</p>
-    <div class="chips" role="group" aria-label="Filter the videos">
-      <button class="chip" type="button" aria-pressed="true" data-group="All">All</button>
-      <button class="chip" type="button" aria-pressed="false" data-group="Commercial">Commercial</button>
-      <button class="chip" type="button" aria-pressed="false" data-group="Brand film">Brand film</button>
-      <button class="chip" type="button" aria-pressed="false" data-group="Social content">Social content</button>
-      <button class="chip" type="button" aria-pressed="false" data-group="Campaign">Campaign</button>
-      <button class="chip" type="button" aria-pressed="false" data-group="One shot">One shot</button>
-    </div>
     <!-- To add a video: copy one <li class="tile"> block and change the Vimeo number, thumbnail and words. -->
     <ul class="grid">
     <li class="tile" data-group="Commercial" style="--r:-2.2deg">
       <a class="snap" href="https://vimeo.com/1233530243" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Butterfly Chocolate">
         <span class="pin" aria-hidden="true"></span>
-        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_480" srcset="https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_320 320w, https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_480 480w, https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 40%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
+        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_480" srcset="https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_320 320w, https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_480 480w, https://i.vimeocdn.com/video/2209224430-3226baf39656f33f633327eccccf055ca402fdd6d9ab75a5f32253349404eb65-d_640 640w" sizes="(max-width: 760px) calc(100vw - 56px), (max-width: 1512px) 31vw, 450px" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 40%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Butterfly Chocolate</b><small>Commercial &middot; Product<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Brand film" style="--r:1.4deg">
       <a class="snap" href="https://vimeo.com/1233530096" target="_blank" rel="noopener" data-play aria-label="Play JUL: Less Waiting, More Skating">
         <span class="pin" aria-hidden="true"></span>
-        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_480" srcset="https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_320 320w, https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_480 480w, https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:72% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
+        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_480" srcset="https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_320 320w, https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_480 480w, https://i.vimeocdn.com/video/2209224150-be4467bcdfb4f0d152e8c20017116e5506a1c0a76329a16e9dbfcab664195169-d_640 640w" sizes="(max-width: 760px) calc(100vw - 56px), (max-width: 1512px) 31vw, 450px" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:72% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>JUL: Less Waiting, More Skating</b><small>Brand film &middot; Lifestyle<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Commercial" style="--r:-0.8deg">
       <a class="snap" href="https://vimeo.com/1233530206" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Dar Hamad">
         <span class="pin" aria-hidden="true"></span>
-        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_480" srcset="https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_320 320w, https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_480 480w, https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
+        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_480" srcset="https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_320 320w, https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_480 480w, https://i.vimeocdn.com/video/2209224298-95278f9338c330b49c9106f8f7d21d86e83f9b97f851c7f9cfb6eda6c5fd742a-d_640 640w" sizes="(max-width: 760px) calc(100vw - 56px), (max-width: 1512px) 31vw, 450px" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Dar Hamad</b><small>Commercial &middot; Restaurant<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Social content" style="--r:2deg">
       <a class="snap" href="https://vimeo.com/1233530186" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Dice: Football Sequence">
         <span class="pin" aria-hidden="true"></span>
-        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_480" srcset="https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_320 320w, https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_480 480w, https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
+        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_480" srcset="https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_320 320w, https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_480 480w, https://i.vimeocdn.com/video/2209224251-bcb4debc3a33d3100539883bceba27fce839ea3e9025cf5e0760775aeea9346c-d_640 640w" sizes="(max-width: 760px) calc(100vw - 56px), (max-width: 1512px) 31vw, 450px" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Dice: Football Sequence</b><small>Social content &middot; Product<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Commercial" style="--r:-1.6deg">
       <a class="snap" href="https://vimeo.com/1233530193" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Deboned">
         <span class="pin" aria-hidden="true"></span>
-        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_480" srcset="https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_320 320w, https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_480 480w, https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 75%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
+        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_480" srcset="https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_320 320w, https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_480 480w, https://i.vimeocdn.com/video/2209224611-6690e72ae6fbb20f935ddca527c8e74b467534aad04b69b2d981e1a941abe303-d_640 640w" sizes="(max-width: 760px) calc(100vw - 56px), (max-width: 1512px) 31vw, 450px" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 75%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Deboned</b><small>Commercial &middot; Restaurant<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Campaign" style="--r:-2.2deg">
       <a class="snap" href="https://vimeo.com/1233530113" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Ever">
         <span class="pin" aria-hidden="true"></span>
-        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_480" srcset="https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_320 320w, https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_480 480w, https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
+        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_480" srcset="https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_320 320w, https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_480 480w, https://i.vimeocdn.com/video/2209224182-0ec1479a8c8f04dbc730a740bbf550d070f7c248686722585a23380815a4bf74-d_640 640w" sizes="(max-width: 760px) calc(100vw - 56px), (max-width: 1512px) 31vw, 450px" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Ever</b><small>Campaign &middot; Seasonal<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Commercial" style="--r:1.4deg">
       <a class="snap" href="https://vimeo.com/1233530092" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Madison &amp; Heig">
         <span class="pin" aria-hidden="true"></span>
-        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_480" srcset="https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_320 320w, https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_480 480w, https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
+        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_480" srcset="https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_320 320w, https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_480 480w, https://i.vimeocdn.com/video/2209224109-7fb072634d8354feb68998af4ad85205d21faece1687e7f10c01a1e01dd33a73-d_640 640w" sizes="(max-width: 760px) calc(100vw - 56px), (max-width: 1512px) 31vw, 450px" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Madison &amp; Heig</b><small>Commercial &middot; Bakery<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="One shot" style="--r:-0.8deg">
       <a class="snap" href="https://vimeo.com/1233530098" target="_blank" rel="noopener" data-play data-vertical aria-label="Play JUL: One Shot">
         <span class="pin" aria-hidden="true"></span>
-        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_480" srcset="https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_320 320w, https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_480 480w, https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
+        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_480" srcset="https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_320 320w, https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_480 480w, https://i.vimeocdn.com/video/2209224160-2581b9da4c89b6296e84d4353ecbbca9b9ec8fdcd85dbd08684b1c25d39249d3-d_640 640w" sizes="(max-width: 760px) calc(100vw - 56px), (max-width: 1512px) 31vw, 450px" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>JUL: One Shot</b><small>One shot &middot; Hospitality<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Commercial" style="--r:2deg">
       <a class="snap" href="https://vimeo.com/1233530156" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Dice">
         <span class="pin" aria-hidden="true"></span>
-        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_480" srcset="https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_320 320w, https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_480 480w, https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
+        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_480" srcset="https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_320 320w, https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_480 480w, https://i.vimeocdn.com/video/2209224224-fe068f1f4a1b2f469a2026e09066066ab89929b6a65301bf2ee8c9c344779f6f-d_640 640w" sizes="(max-width: 760px) calc(100vw - 56px), (max-width: 1512px) 31vw, 450px" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Dice</b><small>Commercial &middot; Product<span class="yr">2026</span></small></span>
       </a>
     </li>
     <li class="tile" data-group="Social content" style="--r:-1.6deg">
       <a class="snap" href="https://vimeo.com/1233530244" target="_blank" rel="noopener" data-play data-vertical aria-label="Play Al Wazzan Al Shamali">
         <span class="pin" aria-hidden="true"></span>
-        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_480" srcset="https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_320 320w, https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_480 480w, https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_640 640w" sizes="(max-width: 560px) 40vw, (max-width: 1100px) 22vw, 18vw" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
+        <span class="photo"><img src="https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_480" srcset="https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_320 320w, https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_480 480w, https://i.vimeocdn.com/video/2209224508-2951dbb271b2d250a9f5780235366d259f7162d5d3b79c53c84ac5ca5a974ed9-d_640 640w" sizes="(max-width: 760px) calc(100vw - 56px), (max-width: 1512px) 31vw, 450px" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6l7.6-4.8z" fill="currentColor"/></svg></span></span>
         <span class="cap"><b>Al Wazzan Al Shamali</b><small>Social content &middot; Delivery<span class="yr">2026</span></small></span>
       </a>
     </li>
@@ -279,16 +267,6 @@ body.has-hire { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
   document.querySelector('.hire .x').addEventListener('click', function () {
     document.querySelector('.hire').hidden = true;
     document.body.classList.remove('has-hire');
-  });
-
-  // Filter buttons for the work grid.
-  var chips = document.querySelector('.chips');
-  chips.addEventListener('click', function (e) {
-    var chip = e.target.closest('.chip');
-    if (!chip) return;
-    chips.querySelectorAll('.chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
-    var g = chip.getAttribute('data-group');
-    document.querySelectorAll('.grid .tile').forEach(function (t) { t.hidden = g !== 'All' && t.getAttribute('data-group') !== g; });
   });
 
   // Video player: Vimeo and YouTube links play on the page, and the player only loads when someone presses play.
@@ -331,3 +309,4 @@ body.has-hire { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
 </script>
 </body>
 </html>
+
