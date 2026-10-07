@@ -32,6 +32,14 @@
 .filters button{font-size:12px;font-weight:500;letter-spacing:0}
 .info b{font-weight:500;letter-spacing:-.01em}
 @media(max-width:600px){.filters button{font-size:11px}}
+
+/* Give each portfolio brand a clear, equal space. */
+.clients{padding:36px 0}
+.clients .eyebrow{margin-bottom:24px}
+.client-names{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.client-names span{display:flex;align-items:center;justify-content:center;min-height:88px;padding:20px 16px;border:1px solid #383838;background:#141414;color:#dedcd6;font-size:14px;font-weight:500;line-height:1.4;letter-spacing:0;text-align:center;overflow-wrap:anywhere}
+@media(max-width:900px){.client-names{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){.client-names{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.client-names span{min-height:80px;padding:16px 12px;font-size:12px}}
 </style>
 </head>
 <body>
@@ -162,7 +170,7 @@
       </a></li></ul>
     <div class="work-bottom"><p id="work-count" aria-live="polite">26 projects</p><button class="outline-button" id="view-all" type="button" hidden>View all work <span aria-hidden="true">↗</span></button></div>
   </section>
-  <section class="clients" aria-label="Brands featured in my work"><p class="eyebrow">Brands in the portfolio</p><div class="client-names"><span>Thinnes</span><span>Butterfly Chocolate</span><span>Dar Hamad</span><span>Deboned</span><span>Eydaam</span><span>Ever</span><span>Dice</span><span>Milk Bun</span><span>Wow Milky</span><span>SVN</span><span>Thinnies</span><span>NIC</span><span>Title</span><span>Madison &amp; Heig</span><span>Al Wazzan Al Shamali</span><span>Mena Homes</span><span>Prolife</span><span>Metal</span><span>Metel</span><span>AL Saeed Lawyer</span></div></section>
+  <section class="clients" aria-label="Brands featured in my work"><p class="eyebrow">Brands in the portfolio</p><div class="client-names" role="list" aria-label="Portfolio brands"><span role="listitem">Thinnies</span><span role="listitem">Butterfly Chocolate</span><span role="listitem">Dar Hamad</span><span role="listitem">Deboned</span><span role="listitem">Eydaam</span><span role="listitem">Ever</span><span role="listitem">Dice</span><span role="listitem">Milk Bun</span><span role="listitem">Wow Milky</span><span role="listitem">SVN</span><span role="listitem">NIC</span><span role="listitem">Title</span><span role="listitem">Madison &amp; Heig</span><span role="listitem">Al Wazzan Al Shamali</span><span role="listitem">Mena Homes</span><span role="listitem">Prolife</span><span role="listitem">Metal</span><span role="listitem">AL Saeed Lawyer</span></div></section>
   <section class="sec about" id="about" aria-labelledby="about-h">
     <div class="about-side">
       <h2 id="about-h">About</h2>
