@@ -98,34 +98,12 @@ a.t:focus-visible { outline: 3px solid #f2e9a8; outline-offset: 6px; border-radi
 .vids a { position: absolute; display: block; pointer-events: auto; cursor: pointer; border-radius: 4px; }
 .vids a:focus-visible { outline: 3px solid #f2e9a8; outline-offset: 3px; }
 @media (prefers-reduced-motion: no-preference) {
-  /* the strings draw themselves out from the photo, then each pin drops in */
-  .anim .threads path[pathLength] { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw .8s cubic-bezier(.5, 0, .3, 1) forwards; }
-  .anim .threads g g path:nth-child(1) { animation-delay: 1.1s; } .anim .threads g g path:nth-child(2) { animation-delay: 1.45s; }
-  .anim .threads g g path:nth-child(3) { animation-delay: 1.25s; } .anim .threads g g path:nth-child(4) { animation-delay: 1.35s; }
-  .anim .threads g g path:nth-child(5) { animation-delay: 1.55s; } .anim .threads g g path:nth-child(6) { animation-delay: 2.1s; }
-  .anim .threads > g:first-child path { animation-delay: 1.3s; }
-  @keyframes draw { to { stroke-dashoffset: 0; } }
-  .anim .threads .arrow { opacity: 0; animation: show .3s 2.7s forwards; }
-  .anim .pin-in { opacity: 0; animation: pin .45s cubic-bezier(.3, 1.6, .5, 1) forwards; }
-  @keyframes pin { from { opacity: 0; transform: translateY(-34px); } to { opacity: 1; transform: none; } }
-  @keyframes show { to { opacity: 1; } }
-
-  /* handwriting and labels are written in as they come into view */
-  .anim .writing .t { clip-path: inset(-20% 100% -20% -5%); transition: clip-path .9s cubic-bezier(.6, 0, .3, 1) var(--d, 0s); }
-  .anim .writing .t.in { clip-path: inset(-20% -10% -20% -5%); }
-
-  /* film strips and side photos slide onto the board as you scroll to them */
-  .anim .film, .anim .slot[class*="slot-side"] { opacity: 0; translate: var(--from, -70px) 0; transition: opacity .7s ease var(--d, 0s), translate .9s cubic-bezier(.2, .8, .2, 1) var(--d, 0s); }
-  .anim .film-2, .anim .film-4, .anim .slot-side-01, .anim .slot-side-03 { --from: 70px; }
-  .anim .film.in, .anim .slot.in { opacity: 1; translate: none; }
-
-  /* the bulb keeps a faint, uneven glow after it comes on */
-  .anim .halo { animation: glow 6s ease-in-out 2s infinite; }
-  @keyframes glow { 0%, 100% { opacity: 1; } 47% { opacity: .82; } 50% { opacity: .94; } 53% { opacity: .78; } }
-
-  /* photos that play a video lift a little under the pointer */
-  .slot { transition: translate .25s, box-shadow .25s; }
-  .slot.lift { translate: 0 -6px; box-shadow: 0 18px 26px -14px #000; }
+  /* the bulb switches on, then now and then flickers off and back on */
+  .flick, .halo { animation: bulb 7s linear .2s infinite; }
+  @keyframes bulb {
+    0% { opacity: .1; } 3% { opacity: 1; } 4.5% { opacity: .25; } 6% { opacity: 1; }
+    62% { opacity: 1; } 63% { opacity: .15; } 64.5% { opacity: 1; } 66% { opacity: .35; } 67.5% { opacity: 1; } 100% { opacity: 1; }
+  }
 }
 
 /* ---------- video player ---------- */
@@ -798,12 +776,12 @@ a.t:focus-visible { outline: 3px solid #f2e9a8; outline-offset: 6px; border-radi
   </g>
   <!-- arrow head at the end of the string -->
   <path class="arrow" d="M614 862 L622 892 L648 878" fill="none" stroke="#c22d31" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <g class="pin-in" style="animation-delay:0.9s"><use href="#pin" transform="translate(505 258) rotate(0) scale(1)"/></g>
-  <g class="pin-in" style="animation-delay:1.8s"><use href="#pin" transform="translate(322 330) rotate(0) scale(1)"/></g>
-  <g class="pin-in" style="animation-delay:2s"><use href="#pin" transform="translate(276 662) rotate(0) scale(1)"/></g>
-  <g class="pin-in" style="animation-delay:2s"><use href="#pin" transform="translate(756 420) rotate(0) scale(1)"/></g>
-  <g class="pin-in" style="animation-delay:2.2s"><use href="#pin" transform="translate(768 655) rotate(0) scale(1)"/></g>
-  <g class="pin-in" style="animation-delay:0.2s"><use href="#pin" transform="translate(232 2690) rotate(0) scale(1)"/></g>
+  <use href="#pin" transform="translate(505 258) rotate(0) scale(1)"/>
+  <use href="#pin" transform="translate(322 330) rotate(0) scale(1)"/>
+  <use href="#pin" transform="translate(276 662) rotate(0) scale(1)"/>
+  <use href="#pin" transform="translate(756 420) rotate(0) scale(1)"/>
+  <use href="#pin" transform="translate(768 655) rotate(0) scale(1)"/>
+  <use href="#pin" transform="translate(232 2690) rotate(0) scale(1)"/>
 </svg>
 
 <!-- ===== hit areas for the scraps (links to the work) ===== -->
@@ -930,40 +908,6 @@ a.t:focus-visible { outline: 3px solid #f2e9a8; outline-offset: 6px; border-radi
 (function () {
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
-  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!still && 'IntersectionObserver' in window) {
-    document.documentElement.classList.add('anim');
-    // Reveal each piece as it scrolls into view, in a short stagger.
-    var items = document.querySelectorAll('.writing .t, .film, .slot[class*="slot-side"]');
-    var io = new IntersectionObserver(function (entries) {
-      var n = 0;
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var el = e.target, top = el.getBoundingClientRect().top + scrollY;
-        // the case file at the top waits for the bulb and the strings
-        var base = top < innerHeight && !el.classList.contains('film') ? 0.5 : 0;
-        el.style.setProperty('--d', (base + n++ * 0.12) + 's');
-        el.classList.add('in');
-        io.unobserve(el);
-      });
-    }, { rootMargin: '0px 0px -12% 0px' });
-    items.forEach(function (el) { io.observe(el); });
-  }
-
-  // Lift the photo under a video spot.
-  var slotFor = function (a) {
-    var r = a.getBoundingClientRect(), best = null;
-    document.querySelectorAll('.slot').forEach(function (s) {
-      var q = s.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
-      if (x > q.left && x < q.right && y > q.top && y < q.bottom) best = s;
-    });
-    return best && (best.closest('.film') || best);
-  };
-  document.querySelectorAll('.vids a').forEach(function (a) {
-    a.addEventListener('pointerenter', function () { var s = slotFor(a); if (s && s.classList.contains('slot')) s.classList.add('lift'); });
-    a.addEventListener('pointerleave', function () { document.querySelectorAll('.lift').forEach(function (s) { s.classList.remove('lift'); }); });
-  });
-
   // Video player: the video plays on the page, and only loads when pressed.
   var lastFocus = null;
   function play(url, vertical) {
