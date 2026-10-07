@@ -63,6 +63,14 @@ nav a.on, nav a:hover { border-bottom-color: #fff; }
 .eps button[aria-current="true"] .n::after { content: ""; display: inline-block; width: 8px; height: 8px; margin-left: 8px; vertical-align: middle; border-radius: 50%; background: #e2231a; }
 .eps button:hover .t { text-decoration: underline; text-underline-offset: 4px; }
 .talk :focus-visible { outline-color: #000; }
+/* Short clips cut from the episodes: a row of vertical frames */
+.clips-wrap { max-width: 1240px; padding: 0 36px 110px 8px; }
+.clips-wrap h3 { margin: 0 0 20px; font-weight: 800; font-stretch: 75%; font-size: 32px; line-height: 1; }
+.clips { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.clip { position: relative; display: block; aspect-ratio: 9 / 16; overflow: hidden; background: #ddd; color: #fff; text-decoration: none; }
+.clip img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.clip:hover img { transform: scale(1.04); }
+.clip span { position: absolute; inset: auto 0 0 0; padding: 30px 10px 10px; background: linear-gradient(transparent, #000a); font-size: 14px; line-height: 1.3; }
 
 /* About and contact */
 .sec { max-width: 760px; padding: 120px 36px 0 8px; }
@@ -83,8 +91,10 @@ footer { padding: 120px 36px 32px 8px; font-size: 14px; color: #8a8a8a; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .film img, .info { transition: none; } }
 @media (max-width: 900px) { .films { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 800px) { .talk-in { grid-template-columns: 1fr; } .stage { max-width: 420px; } }
+@media (max-width: 1000px) { .clips { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; } .clips li { flex: 0 0 min(42vw, 200px); scroll-snap-align: start; } }
 @media (max-width: 700px) {
-  .talk { margin-top: 80px; } .talk-in { padding: 64px 16px 72px; } .now b { font-size: 32px; }
+  .talk { margin-top: 80px; } .talk-in { padding: 64px 16px 56px; } .now b { font-size: 32px; } .clips-wrap { padding: 0 0 72px 16px; } .clips-wrap h3 { font-size: 26px; }
+  .eps button { grid-template-columns: 40px minmax(0, 1fr) auto; gap: 12px; font-size: 16px; } .eps .n { font-size: 22px; }
   .top { padding: 28px 16px 40px 12px; }
   .mark { font-size: 24px; } .logo small { font-size: 11px; margin-top: 5px; }
   nav { gap: 16px; } nav a { font-size: 18px; }
@@ -164,8 +174,25 @@ footer { padding: 120px 36px 32px 8px; font-size: 14px; color: #8a8a8a; }
         <ol class="eps">
           <li><button type="button" data-vimeo="1233541493" data-show="Prolife" data-title="ProBar Challenge, episode 1" data-poster="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_640" aria-current="true">
             <span class="n">01</span><span class="t">ProBar Challenge, episode 1<small>Prolife</small></span><span class="len">2:58</span></button></li>
+          <li><button type="button" data-vimeo="1233541493" data-show="Prolife" data-title="ProBar Challenge, episode 2" data-poster="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_640" aria-current="false">
+            <span class="n">02</span><span class="t">ProBar Challenge, episode 2<small>Prolife</small></span><span class="len">2:58</span></button></li>
+          <li><button type="button" data-vimeo="1233541493" data-show="Prolife" data-title="ProBar Challenge, episode 3" data-poster="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_640" aria-current="false">
+            <span class="n">03</span><span class="t">ProBar Challenge, episode 3<small>Prolife</small></span><span class="len">2:58</span></button></li>
+          <li><button type="button" data-vimeo="1233541493" data-show="Prolife" data-title="ProBar Challenge, episode 4" data-poster="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_640" aria-current="false">
+            <span class="n">04</span><span class="t">ProBar Challenge, episode 4<small>Prolife</small></span><span class="len">2:58</span></button></li>
         </ol>
       </div>
+    </div>
+    <div class="clips-wrap">
+      <h3>Clips for social media</h3>
+      <ul class="clips">
+        <li><a class="clip" href="https://vimeo.com/1233541493" target="_blank" rel="noopener" data-play data-vertical aria-label="Play ProBar Challenge, clip 1"><img src="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_480" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 40%"><span>ProBar Challenge, clip 1</span></a></li>
+        <li><a class="clip" href="https://vimeo.com/1233541493" target="_blank" rel="noopener" data-play data-vertical aria-label="Play ProBar Challenge, clip 2"><img src="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_480" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 60%"><span>ProBar Challenge, clip 2</span></a></li>
+        <li><a class="clip" href="https://vimeo.com/1233541493" target="_blank" rel="noopener" data-play data-vertical aria-label="Play ProBar Challenge, clip 3"><img src="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_480" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 30%"><span>ProBar Challenge, clip 3</span></a></li>
+        <li><a class="clip" href="https://vimeo.com/1233541493" target="_blank" rel="noopener" data-play data-vertical aria-label="Play ProBar Challenge, clip 4"><img src="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_480" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 75%"><span>ProBar Challenge, clip 4</span></a></li>
+        <li><a class="clip" href="https://vimeo.com/1233541493" target="_blank" rel="noopener" data-play data-vertical aria-label="Play ProBar Challenge, clip 5"><img src="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_480" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 50%"><span>ProBar Challenge, clip 5</span></a></li>
+        <li><a class="clip" href="https://vimeo.com/1233541493" target="_blank" rel="noopener" data-play data-vertical aria-label="Play ProBar Challenge, clip 6"><img src="https://i.vimeocdn.com/video/2209239560-5eae43443e16947b1433249649edc88da02c11020668ebea7be38b105a2621c9-d_480" alt="" width="480" height="853" loading="lazy" decoding="async" style="object-position:50% 90%"><span>ProBar Challenge, clip 6</span></a></li>
+      </ul>
     </div>
   </section>
 
