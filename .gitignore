@@ -1,0 +1,4 @@
+# API keys for the LinkedIn skills (Publora / Apify / detectors) — never commit
+.env
+**/.env
+__pycache__/
